@@ -12,7 +12,11 @@ const itemsByCategory = {
                    '7.62x51mm 20rnd M14 Mag', '8rnd .45 ACP', '9x19mm 15rnd M9 Mag', '100rnd PK Belt', 
                    '5.56x45mm 30rnd STANAG Mag'], 
     'Attachments': ['4x20 Carry Handle Scope'], 
-    'Vehicles': ['UH-1H Transport Helicopter', 'Ural-4320 Transport Truck - Canopy'], 
+    'Vehicles': ['UH-1H Transport Helicopter', 'Ural-4320 Transport Truck - Canopy', 
+                'UAZ-469 Off-road', 'UAZ-469 Off-road - Open Top', 'M151A2 Off-road', 'UAZ-452 Off-road', 
+                'M998 Light Utility Vehicle', 'M1025 Light Armoured Vehicle', 'M923A1 Transport Truck', 
+                'M923A1 Fuel Truck', 'M923A1 Transport Truck - Canopy', 'Ural-4320 Fuel Truck', 
+                'Ural-4320 Transport Truck', 'Ural-4320 Transport Truck - Canopy', 'Pickup-Truck', 'VW Rolf'], 
     'Vests': [], 
     'Helmets': [], 
     'Clothes': ['M88 Jacket', 'M88 Trousers', 'Soviet Combat Boots', 'US Combat Boots', 'BDU Blouse', 
@@ -61,21 +65,69 @@ const itemComponents = {
     },
     'Ural-4320 Transport Truck - Canopy': {
         'Non-HQ': {},
-        'HQ': {
-            'Mechanical Component (HQ)': 5,
-            'Interior Part (HQ)': 5,
-            'Engine Part (HQ)': 3
+        'HQ': {'Mechanical Component (HQ)': 5, 'Interior Part (HQ)': 5, 'Engine Part (HQ)': 3
         }
     },
     'UH-1H Transport Helicopter': {
         'Non-HQ': {},
-        'HQ': {
-            'Mechanical Component (HQ)': 19,
-            'Interior Part (HQ)': 17,
-            'Engine Part (HQ)': 12,
-            'Rotor (HQ)': 30,
-            'Special Rotor': 1
+        'HQ': { 'Mechanical Component (HQ)': 19, 'Interior Part (HQ)': 17, 'Engine Part (HQ)': 12, 'Rotor (HQ)': 30, 'Special Rotor': 1
         }
+    },
+    'UAZ-469 Off-road': {
+        'Non-HQ': { 'Mechanical Component': 1, 'Interior Part': 1, 'Engine Part': 1 },
+        'HQ': {}
+    },
+    'UAZ-469 Off-road - Open Top': {
+        'Non-HQ': { 'Mechanical Component': 1, 'Interior Part': 1, 'Engine Part': 1 },
+        'HQ': {}
+    },
+    'M151A2 Off-road': {
+        'Non-HQ': { 'Mechanical Component': 1, 'Engine Part': 1 },
+        'HQ': {}
+    },
+    'UAZ-452 Off-road': {
+        'Non-HQ': { 'Mechanical Component': 3, 'Interior Part': 2, 'Engine Part': 3 },
+        'HQ': {}
+    },
+    'M998 Light Utility Vehicle': {
+        'Non-HQ': { 'Mechanical Component': 5, 'Interior Part': 3, 'Engine Part': 5 },
+        'HQ': {}
+    },
+    'M1025 Light Armoured Vehicle': {
+        'Non-HQ': { 'Mechanical Component': 9, 'Interior Part': 5, 'Engine Part': 9 },
+        'HQ': {}
+    },
+    'M923A1 Transport Truck': {
+        'Non-HQ': { 'Mechanical Component': 31, 'Interior Part': 19, 'Engine Part': 31 },
+        'HQ': {}
+    },
+    'M923A1 Fuel Truck': {
+        'Non-HQ': {},
+        'HQ': { 'Mechanical Component (HQ)': 1, 'Interior Part (HQ)': 1, 'Engine Part (HQ)': 1 }
+    },
+    'M923A1 Transport Truck - Canopy': {
+        'Non-HQ': {},
+        'HQ': { 'Mechanical Component (HQ)': 2, 'Interior Part (HQ)': 2, 'Engine Part (HQ)': 1 }
+    },
+    'Ural-4320 Fuel Truck': {
+        'Non-HQ': {},
+        'HQ': { 'Mechanical Component (HQ)': 4, 'Interior Part (HQ)': 3, 'Engine Part (HQ)': 2 }
+    },
+    'Ural-4320 Transport Truck': {
+        'Non-HQ': {},
+        'HQ': { 'Mechanical Component (HQ)': 4, 'Interior Part (HQ)': 3, 'Engine Part (HQ)': 2 }
+    },
+    'Ural-4320 Transport Truck - Canopy': {
+        'Non-HQ': {},
+        'HQ': { 'Mechanical Component (HQ)': 4, 'Interior Part (HQ)': 3, 'Engine Part (HQ)': 2 }
+    },
+    'Pickup-Truck': {
+        'Non-HQ': { 'Mechanical Component': 19, 'Interior Part': 11, 'Engine Part': 19 },
+        'HQ': {}
+    },
+    'VW Rolf': {
+        'Non-HQ': { 'Mechanical Component': 31, 'Interior Part': 19, 'Engine Part': 31 },
+        'HQ': {}
     }
 };
 
