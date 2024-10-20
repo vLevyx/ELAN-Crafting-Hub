@@ -13,7 +13,7 @@
             <img src="https://www.svgrepo.com/show/433086/light-mode.svg" alt="Toggle Dark Mode" />
         </button>
         <div class="form-group">
-            <label for="categories">Select category:</label>
+            <label for="categories">Select Category:</label>
             <select id="categories" class="select-box">
                 <option value="--">--</option>
                 <option value="Weapons">Weapons</option>
@@ -26,28 +26,12 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="items">Select item:</label>
+            <label for="items">Select Item:</label>
             <select id="items" class="select-box"></select>
         </div>
         <div class="form-group">
-            <label for="quantity">Select quantity:</label>
-            <select id="quantity" class="select-box">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-            </select>
+            <label for="quantity">Enter Quantity:</label>
+            <input type="number" id="quantity" class="select-box" min="1" value="1" />
         </div>
         <button id="calculateButton" class="calculate-button">Calculate Materials</button>
         <div id="result" class="result"></div>

@@ -27,6 +27,27 @@ const itemsByCategory = {
                 'Veshmeshok Backpack', 'Wool Hat']
 };
 
+// Dark mode toggle
+const darkModeButton = document.getElementById('darkModeButton');
+if (darkModeButton) {  // Ensure the button is present in the DOM
+    darkModeButton.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+
+        // Toggling dark-mode class for specific elements
+        document.querySelector('.container').classList.toggle('dark-mode');
+        document.querySelectorAll('.select-box').forEach(select => select.classList.toggle('dark-mode'));
+        document.getElementById('result').classList.toggle('dark-mode');
+
+        // Change icon based on mode
+        const img = darkModeButton.querySelector('img');
+        if (document.body.classList.contains('dark-mode')) {
+            img.src = 'https://www.svgrepo.com/show/433086/light-mode.svg'; // Light mode icon
+        } else {
+            img.src = 'https://www.svgrepo.com/show/433086/light-mode.svg'; // Dark mode icon
+        }
+    });
+}
+
 const itemComponents = {
     'Weapons': {
         'AK-47': {
@@ -181,7 +202,7 @@ const itemComponents = {
         },
         '7.62x54mmR 10rnd SVD Mag': {
             'Non-HQ': {},
-            'HQ': {}
+            'HQ': { 'Ammo (HQ)': 1 }
         }
     },
     'Attachments': {
@@ -644,27 +665,6 @@ function calculateResources() {
     for (const hqComponent in totalHQComponents) {
         resultHTML += `<li>${hqComponent}: ${totalHQComponents[hqComponent]}</li>`;
     }
-
-// Dark mode toggle
-const darkModeButton = document.getElementById('darkModeButton');
-const container = document.querySelector('.container'); // Select the container element
-const selectBoxes = document.querySelectorAll('.select-box'); // Select all select boxes
-const resultBox = document.getElementById('result'); // Select the result box
-
-darkModeButton.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    container.classList.toggle('dark-mode'); // Toggle dark-mode class on container
-    resultBox.classList.toggle('dark-mode'); // Toggle dark-mode class on result box
-    selectBoxes.forEach(select => select.classList.toggle('dark-mode')); // Toggle dark-mode class on all select boxes
-
-    // Change icon based on mode
-    const img = darkModeButton.querySelector('img');
-    if (document.body.classList.contains('dark-mode')) {
-        img.src = 'https://www.svgrepo.com/show/433086/light-mode.svg'; // Light mode icon
-    } else {
-        img.src = 'https://www.svgrepo.com/show/433086/light-mode.svg'; // Dark mode icon (replace with appropriate dark mode icon if available)
-    }
-});
 
     resultHTML += '</ul>';
 

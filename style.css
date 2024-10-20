@@ -86,7 +86,48 @@ h1 {
     color: #888;
 }
 
+/* Style the input number field similarly to the select-box */
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+    border-color: #007bff;
+}
+
+input[type="number"].dark-mode {
+    background-color: #555;
+    color: #e0e0e0;
+    border-color: #777;
+}
+
 /* Dark mode styles */
+#darkModeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+
+#darkModeButton:hover {
+    transform: scale(1.2); /* Expands the button to 120% of its original size */
+}
+
+body.dark-mode h1 {
+    color: #ababab; /* Brighter text color for dark mode */
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.196); /* Add shadow for readability */
+}
+
 body.dark-mode {
     background-color: #333;
 }
@@ -96,13 +137,9 @@ body.dark-mode {
     color: #e0e0e0; /* Change text color to off-white */
 }
 
-h1.dark-mode {
-    color: #e0e0e0; /* Change heading color to off-white in dark mode */
-}
-
 .select-box.dark-mode {
     background-color: #555;
-    color: #e0e0e0; /* Change text color to off-white */
+    color: #e0e0e0;
     border-color: #777;
 }
 
@@ -126,6 +163,6 @@ h1.dark-mode {
 }
 
 .dark-mode-button img {
-    width: 24px; /* Adjust size as needed */
+    width: 24px;
     height: auto;
 }
