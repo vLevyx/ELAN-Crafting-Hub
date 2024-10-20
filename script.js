@@ -7,14 +7,15 @@ const componentsList = ['Cloth', 'Iron Plate', 'Kevlar', 'Component', 'Tempered 
 const hqComponentsList = ['Component (HQ)', 'Weapon Part (HQ)', 'Stabilizer (HQ)', 'Attachment Part (HQ)', 'Ammo (HQ)', 'Mechanical Component (HQ)', 'Engine Part (HQ)', 'Interior Part (HQ)', 'Rotor (HQ)', 'Special Rotor', 'Special Gun Barrel'];
 
 const itemsByCategory = {
-    'Weapons': ['AK-47', 'Colt 1911', 'M16A2', 'M21 SWS', 'M249 SAW', 'M416', 'M9', 'MP5A2', 'PKM', 'PM', 'RPK-74', 'S8-58V', 'Sa-58P', 'SVD'],
-    'Magazines': ['100rnd PK Belt', '5.45x39mm 45rnd RPK-74 Tracer Mag', '5.56x45mm 200rnd M249 Belt', '5.56x45mm 30rnd STANAG Mag',
-                '7.62x54mmR 100rnd PK Belt', '7.62x39mm 30rnd Sa-58 Mag', '7.62x51mm 20rnd M14 Mag', '8rnd .45 ACP', '9x18mm 8rnd PM Mag',
+    'Weapons': ['AK-47', 'Colt 1911', 'Desert Eagle', 'M16A2', 'M16A2 - AUTO', 'M21 SWS', 'M249 SAW', 'M416', 'M9', 'MP5A2', 'MP7A2', 'PKM', 'PM', 'RPK-74', 
+                'S8-58V', 'Sa-58P', 'Scar-H', 'SIG MCX', 'SIG MCX SPEAR', 'SSG10A2-Sniper', 'Stegr AUG', 'SR-25 Rifle', 'SVD'],
+    'Magazines': ['100rnd PK Belt', '5.45x39mm 30rnd AK Mag', '5.45x39mm 45rnd RPK-74 Tracer Mag', '5.56x45mm 200rnd M249 Belt', '5.56x45mm 30rnd STANAG Mag',
+                '7.62x54mmR 100rnd PK Belt', '7.62x39mm 30rnd Sa-58 Mag', '7.62x51mm M80 Mag', '7.62x51mm 20rnd M14 Mag', '7.62x54mmR 10rnd SVD Mag', '8rnd .45 ACP', '9x18mm 8rnd PM Mag',
                 '9x19mm 15rnd M9 Mag', '30rnd 9x19 Mag'], 
-    'Attachments': ['ART II Scope', 'PSO-1 Scope', '4x20 Carry Handle Scope'], 
-    'Vehicles': ['M1025 Light Armoured Vehicle', 'M151A2 Off-road', 'M923A1 Fuel Truck', 'M923A1 Transport Truck', 'M923A1 Transport Truck - Canopy', 
-                'M998 Light Utility Vehicle', 'Pickup-Truck', 'S1203 Minibus', 'UAZ-452 Off-road', 'UAZ-469 Off-road', 'UAZ-469 Off-road - Open Top', 
-                'UH-1H Transport Helicopter', 'Ural-4320 Fuel Truck', 'Ural-4320 Transport Truck', 'Ural-4320 Transport Truck - Canopy', 'VW Rolf'],
+    'Attachments': ['ART II Scope', 'Carry Handle Red-Dot-Sight', 'PSO-1 Scope', '4x20 Carry Handle Scope'], 
+    'Vehicles': ['M1025 Light Armoured Vehicle', 'M151A2 Off-Road', 'M151A2 Off-Road Open Top', 'M923A1 Fuel Truck', 'M923A1 Transport Truck', 'M923A1 Transport Truck - Canopy', 
+                'M998 Light Utility Vehicle', 'M998 Light Utility Vehicle - Canopy', 'Mi-8MT Transport Helicopter', 'Pickup-Truck', 'S1203 Minibus', 'UAZ-452 Off-road', 'UAZ-469 Off-road', 'UAZ-469 Off-road - Open Top', 
+                'UH-1H Transport Helicopter', 'Ural-4320 Fuel Truck', 'Ural-4320 Transport Truck', 'Ural-4320 Transport Truck - Canopy', 'Ural (Device)', 'VW Rolf'],
     'Helmets': ['PASGT Helmet', 'PASGT Helmet - Camouflaged', 'PASGT Helmet - Camouflaged Netting', 'SPH-4 Helmet', 'SSh-68 Helmet', 
                 'SSh-68 Helmet - Camouflaged', 'SSh-68 Helmet - Cover', 'SSh-68 Helmet - Netting', 'ZSh-5 Helmet'], 
     'Clothes': ['ALICE Medium Backpack', 'Bandana', 'BDU Blouse', 'BDU Trousers', 'Beanie', 'Cargo Pants',
@@ -36,8 +37,16 @@ const itemComponents = {
             'Non-HQ': { 'Weapon Part': 5, 'Stabilizer': 3, 'Attachment Part': 3 },
             'HQ': {}
         },
+        'Desert Eagle': {
+            'Non-HQ': {},
+            'HQ': { 'Weapon Part (HQ)': 1, 'Stabilizer (HQ)': 1, 'Attachment Part (HQ)': 2 }
+        },
         'M16A2': {
             'Non-HQ': { 'Weapon Part': 27, 'Stabilizer': 15, 'Attachment Part': 17 },
+            'HQ': {}
+        },
+        'M16A2 - AUTO': {
+            'Non-HQ': { 'Weapon Part': 39, 'Stabilizer': 21, 'Attachment Part': 24 },
             'HQ': {}
         },
         'M21 SWS': {
@@ -60,6 +69,10 @@ const itemComponents = {
             'Non-HQ': { 'Weapon Part': 11, 'Stabilizer': 6, 'Attachment Part': 7 },
             'HQ': {}
         },
+        'MP7A2': {
+            'Non-HQ': { 'Weapon Part': 15, 'Stabilizer': 8, 'Attachment Part': 9 },
+            'HQ': {}
+        },
         'PKM': {
             'Non-HQ': {},
             'HQ': { 'Weapon Part (HQ)': 19, 'Stabilizer (HQ)': 19, 'Attachment Part (HQ)': 23, 'Special Gun Barrel': 1 }
@@ -74,11 +87,35 @@ const itemComponents = {
         },
         'S8-58V': {
             'Non-HQ': {},
-            'HQ': {}
+            'HQ': { 'Weapon Part (HQ)': 3, 'Stabilizer (HQ)': 3, 'Attachment Part (HQ)': 3 }
         },
         'Sa-58P': {
             'Non-HQ': {},
             'HQ': { 'Weapon Part (HQ)': 3, 'Stabilizer (HQ)': 3, 'Attachment Part (HQ)': 3 }
+        },
+        'Scar-H': {
+            'Non-HQ': {},
+            'HQ': { 'Weapon Part (HQ)': 4, 'Stabilizer (HQ)': 4, 'Attachment Part (HQ)': 5 }
+        },
+        'SIG MCX': {
+            'Non-HQ': { 'Weapon Part': 55, 'Stabilizer': 30, 'Attachment Part': 34 },
+            'HQ': {}
+        },
+        'SIG MCX SPEAR': {
+            'Non-HQ': {},
+            'HQ': { 'Weapon Part (HQ)': 3, 'Stabilizer (HQ)': 3, 'Attachment Part (HQ)': 4 }
+        },
+        'SSG10A2-Sniper': {
+            'Non-HQ': {},
+            'HQ': { 'Weapon Part (HQ)': 3, 'Stabilizer (HQ)': 3, 'Attachment Part (HQ)': 3 }
+        },
+        'Stegr AUG': {
+            'Non-HQ': { 'Weapon Part': 51, 'Stabilizer': 28, 'Attachment Part': 31 },
+            'HQ': {}
+        },
+        'SR-25 Rifle': {
+            'Non-HQ': {},
+            'HQ': { 'Weapon Part (HQ)': 3, 'Stabilizer (HQ)': 3, 'Attachment Part (HQ)': 4 }
         },
         'SVD': {
             'Non-HQ': {},
@@ -94,9 +131,17 @@ const itemComponents = {
             'Non-HQ': { 'Ammo': 1 },
             'HQ': {}
         },
+        '7.62x51mm M80 Mag': {
+            'Non-HQ': { 'Ammo': 2 },
+            'HQ': {}
+        },
         '7.62x51mm 20rnd M14 Mag': {
             'Non-HQ': { 'Ammo': 1 },
             'HQ': {}
+        },
+        '7.62x54mmR 10rnd SVD Mag': {
+            'Non-HQ': {},
+            'HQ': { 'Ammo (HQ)': 1 }
         },
         '8rnd .45 ACP': {
             'Non-HQ': { 'Ammo': 1 },
@@ -122,6 +167,10 @@ const itemComponents = {
             'Non-HQ': { 'Ammo': 1 },
             'HQ': {}
         },
+        '5.45x39mm 30rnd AK Mag': {
+            'Non-HQ': { 'Ammo': 2 },
+            'HQ': {}
+        },
         '5.45x39mm 45rnd RPK-74 Tracer Mag': {
             'Non-HQ': {},
             'HQ': { 'Ammo (HQ)': 1 }
@@ -142,6 +191,10 @@ const itemComponents = {
         },
         'ART II Scope': {
             'Non-HQ': { 'Component': 2, 'Tempered Glass': 1 },
+            'HQ': {}
+        },
+        'Carry Handle Red-Dot-Sight': {
+            'Non-HQ': { 'Component': 5, 'Tempered Glass': 2 },
             'HQ': {}
         },
         'PSO-1 Scope': {
@@ -166,7 +219,11 @@ const itemComponents = {
             'Non-HQ': { 'Mechanical Component': 1, 'Interior Part': 1, 'Engine Part': 1 },
             'HQ': {}
         },
-        'M151A2 Off-road': {
+        'M151A2 Off-Road': {
+            'Non-HQ': { 'Mechanical Component': 1, 'Engine Part': 1 },
+            'HQ': {}
+        },
+        'M151A2 Off-Road Open Top': {
             'Non-HQ': { 'Mechanical Component': 1, 'Engine Part': 1 },
             'HQ': {}
         },
@@ -177,6 +234,14 @@ const itemComponents = {
         'M998 Light Utility Vehicle': {
             'Non-HQ': { 'Mechanical Component': 5, 'Interior Part': 3, 'Engine Part': 5 },
             'HQ': {}
+        },
+        'M998 Light Utility Vehicle - Canopy': {
+            'Non-HQ': { 'Mechanical Component': 6, 'Interior Part': 4, 'Engine Part': 4 },
+            'HQ': {}
+        },
+        'Mi-8MT Transport Helicopter': {
+            'Non-HQ': {},
+            'HQ': { 'Mechanical Component (HQ)': 30, 'Interior Part (HQ)': 27, 'Engine Part (HQ)': 19, 'Rotor (HQ)': 48, 'Special Rotor': 1 }
         },
         'M1025 Light Armoured Vehicle': {
             'Non-HQ': { 'Mechanical Component': 9, 'Interior Part': 5, 'Engine Part': 9 },
@@ -205,6 +270,10 @@ const itemComponents = {
         'Ural-4320 Transport Truck - Canopy': {
             'Non-HQ': {},
             'HQ': { 'Mechanical Component (HQ)': 4, 'Interior Part (HQ)': 3, 'Engine Part (HQ)': 2 }
+        },
+        'Ural (Device)': {
+            'Non-HQ': {},
+            'HQ': { 'Mechanical Component (HQ)': 29, 'Interior Part (HQ)': 27, 'Engine Part (HQ)': 18 }
         },
         'Pickup-Truck': {
             'Non-HQ': { 'Mechanical Component': 19, 'Interior Part': 11, 'Engine Part': 19 },
