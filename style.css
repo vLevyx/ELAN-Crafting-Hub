@@ -22,7 +22,7 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 30px;
-    color: #333;
+    color: #333; /* Default heading color */
 }
 
 .form-group {
@@ -68,7 +68,6 @@ h1 {
     margin-top: 20px;
     padding: 15px;
     background-color: #f9f9f9;
-    border-radius: 5px;
 }
 
 .result h2 {
@@ -85,4 +84,48 @@ h1 {
     margin-top: 30px;
     font-size: 14px;
     color: #888;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #333;
+}
+
+.container.dark-mode {
+    background-color: #444;
+    color: #e0e0e0; /* Change text color to off-white */
+}
+
+h1.dark-mode {
+    color: #e0e0e0; /* Change heading color to off-white in dark mode */
+}
+
+.select-box.dark-mode {
+    background-color: #555;
+    color: #e0e0e0; /* Change text color to off-white */
+    border-color: #777;
+}
+
+.calculate-button.dark-mode {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.result.dark-mode {
+    background-color: #555;
+    color: #e0e0e0; /* Change text color to off-white */
+}
+
+.dark-mode-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dark-mode-button img {
+    width: 24px; /* Adjust size as needed */
+    height: auto;
 }

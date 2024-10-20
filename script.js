@@ -645,6 +645,27 @@ function calculateResources() {
         resultHTML += `<li>${hqComponent}: ${totalHQComponents[hqComponent]}</li>`;
     }
 
+// Dark mode toggle
+const darkModeButton = document.getElementById('darkModeButton');
+const container = document.querySelector('.container'); // Select the container element
+const selectBoxes = document.querySelectorAll('.select-box'); // Select all select boxes
+const resultBox = document.getElementById('result'); // Select the result box
+
+darkModeButton.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    container.classList.toggle('dark-mode'); // Toggle dark-mode class on container
+    resultBox.classList.toggle('dark-mode'); // Toggle dark-mode class on result box
+    selectBoxes.forEach(select => select.classList.toggle('dark-mode')); // Toggle dark-mode class on all select boxes
+
+    // Change icon based on mode
+    const img = darkModeButton.querySelector('img');
+    if (document.body.classList.contains('dark-mode')) {
+        img.src = 'https://www.svgrepo.com/show/433086/light-mode.svg'; // Light mode icon
+    } else {
+        img.src = 'https://www.svgrepo.com/show/433086/light-mode.svg'; // Dark mode icon (replace with appropriate dark mode icon if available)
+    }
+});
+
     resultHTML += '</ul>';
 
     document.getElementById('result').innerHTML = resultHTML;
