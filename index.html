@@ -28,15 +28,17 @@
         <div class="form-group">
             <label for="items" class="item-label">Select Item:</label>
             <div class="item-container">
-                <select id="items" class="select-box item-select"></select>
+                <div class="flex-container">
+                    <select id="items" class="select-box item-select" style="width: 65%;"></select>
+                    <div class="crafting-level" style="width: 30%;">Crafting Level</div>
+                </div>
             </div>
-        </div>                       
+        </div>                           
         <div class="form-group">
             <label for="quantity">Enter Quantity:</label>
             <input type="number" id="quantity" class="select-box" min="1" value="1" />
         </div>
         <button id="calculateButton" class="calculate-button">Calculate Materials</button>
-        
         <div id="result" class="result">
             <h2>Resources needed:</h2>
             <ul id="resources-list"></ul>

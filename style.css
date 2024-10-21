@@ -25,6 +25,32 @@ body {
     transition: background-color 0.2s ease, color 0.1s ease; /* Add transition for color changes */
 }
 
+.flex-container {
+    display: flex; /* Enable flexbox layout */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Center items vertically */
+}
+
+/* Crafting Level Styles */
+.crafting-level {
+    width: 30%; /* Width remains at 30% */
+    display: flex; /* Allow inline display */
+    height: 46px; /* Set a fixed height to match the Select Item box */
+    padding: 10px; /* Padding for better spacing */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text color */
+    font-size: 16px; /* Font size */
+}
+
+/* Dark Mode Styles for Crafting Level */
+body.dark-mode .crafting-level {
+    background-color: #555; /* Darker background */
+    color: #e0e0e0; /* Lighter text color */
+    border-color: #777; /* Darker border color */
+}
+
 h1 {
     font-family: 'Poppins', sans-serif; /* Use Poppins for a clean, modern look */
     font-weight: 600; /* Increased weight for more emphasis */

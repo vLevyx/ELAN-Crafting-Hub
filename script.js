@@ -28,6 +28,71 @@ const itemsByCategory = {
                 'Veshmeshok Backpack', 'Wool Hat']
 };
 
+// Crafting levels for each item
+const craftingLevels = {
+    'AK-47': 10,
+    'Colt 1911': 10,
+    'Desert Eagle': 10,
+    'M16A2': 5,
+    'M16A2 - AUTO': 6,
+    'M21 SWS': 0,
+    'M249 SAW': 0,
+    'M416': 0,
+    'M9': 3,
+    'MP5A2': 5,
+    'MP7A2': 5,
+    'PKM': 12,
+    'PM': 2,
+    'RPK-74': 10,
+    'S8-58V': 9,
+    'Sa-58P': 9,
+    'Scar-H': 11,
+    'SIG MCX': 7,
+    'SIG MCX SPEAR': 10,
+    'SSG10A2-Sniper': 10,
+    'Stegr AUG': 6,
+    'SR-25 Rifle': 11,
+    'SVD': 10,
+    '100rnd PK Belt': 0,
+    '5.45x39mm 30rnd AK Mag': 0,
+    '5.45x39mm 45rnd RPK-74 Tracer Mag': 0,
+    '5.56x45mm 200rnd M249 Belt': 0,
+    '5.56x45mm 30rnd STANAG Mag': 0,
+    '7.62x54mmR 100rnd PK Belt': 0,
+    '7.62x39mm 30rnd Sa-58 Mag': 0,
+    '7.62x51mm M80 Mag': 0,
+    '7.62x51mm 20rnd M14 Mag': 0,
+    '7.62x54mmR 10rnd SVD Mag': 0,
+    '8rnd .45 ACP': 0,
+    '9x18mm 8rnd PM Mag': 0,
+    '9x19mm 15rnd M9 Mag': 0,
+    '30rnd 9x19 Mag': 0,
+    'ART II Scope': 0,
+    'Carry Handle Red-Dot-Sight': 0,
+    'PSO-1 Scope': 0,
+    '4x20 Carry Handle Scope': 0,
+    // Add more items as needed
+};
+
+// Function to calculate and display the crafting level
+function calculateMaterials() {
+    const selectedCategory = document.getElementById('categories').value;
+    const selectedItem = document.getElementById('items').value;
+    const quantity = document.getElementById('quantity').value;
+
+    // Find the crafting level for the selected item
+    const craftingLevel = craftingLevels[selectedItem] || 0; // Default to 0 if item not found
+
+    // Display the crafting level in the crafting level box
+    const craftingLevelBox = document.querySelector('.crafting-level');
+    craftingLevelBox.textContent = `Crafting Level: ${craftingLevel}`;
+
+    // Optional: Add additional material calculation logic based on quantity and crafting level
+}
+
+// Add event listener to the calculate button
+document.getElementById('calculateButton').addEventListener('click', calculateMaterials);
+
 // Dark mode toggle
 const darkModeButton = document.getElementById('darkModeButton');
 if (darkModeButton) {  // Ensure the button is present in the DOM
