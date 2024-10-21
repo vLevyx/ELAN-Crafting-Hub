@@ -26,15 +26,26 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="items">Select Item:</label>
-            <select id="items" class="select-box"></select>
-        </div>
+            <label for="items" class="item-label">Select Item:</label>
+            <div class="item-container">
+                <select id="items" class="select-box item-select"></select>
+            </div>
+        </div>                       
         <div class="form-group">
             <label for="quantity">Enter Quantity:</label>
             <input type="number" id="quantity" class="select-box" min="1" value="1" />
         </div>
         <button id="calculateButton" class="calculate-button">Calculate Materials</button>
-        <div id="result" class="result"></div>
+        
+        <div id="result" class="result">
+            <h2>Resources needed:</h2>
+            <ul id="resources-list"></ul>
+            <h2>Components needed:</h2>
+            <ul id="components-list"></ul>
+            <h2>HQ Components needed:</h2>
+            <ul id="hq-components-list"></ul>
+        </div>
+        
         <p class="footer">Made with ❤️ by Levy</p>
         <p class="footer">ELAN: v.0.6.23</p>
     </div>

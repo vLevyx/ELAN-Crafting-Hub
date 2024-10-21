@@ -1,3 +1,6 @@
+/* Import the "Poppins" font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 /* Reset default margin and padding */
 * {
     margin: 0;
@@ -6,23 +9,49 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif; /* Use Poppins font for body */
+    font-weight: 400; /* Regular weight for body text */
     background-color: #f0f0f0;
+    transition: background-color 0.2s ease; /* Add transition for background color */
 }
 
 .container {
     max-width: 600px;
-    margin: 50px auto;
+    margin: 30px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, color 0.1s ease; /* Add transition for color changes */
 }
 
 h1 {
+    font-family: 'Poppins', sans-serif; /* Use Poppins for a clean, modern look */
+    font-weight: 600; /* Increased weight for more emphasis */
+    font-size: 2.0rem; /* Slightly larger font size for better visibility */
+    text-transform: uppercase; /* Make the title all uppercase */
     text-align: center;
-    margin-bottom: 30px;
-    color: #333; /* Default heading color */
+    margin-bottom: 15px; /* Reduced margin for closer positioning */
+    color: #333; /* Dark color for readability */
+    letter-spacing: 2px; /* Increased letter spacing for uppercase text */
+    padding: 10px; /* Padding for spacing */
+    position: relative; /* Position for the pseudo-element */
+    overflow: hidden; /* To contain the pseudo-element */
+    white-space: nowrap; /* Ensure the title stays on one line */
+    max-width: 100%; /* Allow full width for the title */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+}
+
+/* Static underline effect using a pseudo-element */
+h1::after {
+    content: '';
+    display: block;
+    width: 50%; /* Width of the underline */
+    height: 2px; /* Height of the underline */
+    background: #007bff; /* Color of the underline */
+    margin: 5px auto; /* Center the underline and close to title */
+    border-radius: 5px; /* Rounded corners */
 }
 
 .form-group {
@@ -61,22 +90,51 @@ h1 {
 }
 
 .calculate-button:hover {
-    background-color: #0056b3;
+    background-color: #1775da;
 }
 
+/* Result Section Updates */
 .result {
     margin-top: 20px;
     padding: 15px;
     background-color: #f9f9f9;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .result h2 {
     margin-bottom: 10px;
+    font-weight: 600; /* Slightly bolder for emphasis */
+    color: #333; /* Default header color */
+    font-size: 1.5rem; /* Adjusted size for better visibility */
+    padding-bottom: 5px; /* Space between text and underline */
+    position: relative; /* For pseudo-element */
 }
 
+/* Static underline for result headers */
+.result h2::after {
+    content: '';
+    display: block;
+    width: 100%; /* Full width for the underline */
+    height: 2px; /* Height of the underline */
+    background: #333; /* Default color of the underline */
+    margin-top: 5px; /* Space between text and underline */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Remove the box container around individual resources and components */
 .result ul {
-    padding-left: 20px;
-    margin-bottom: 10px; /* Add spacing between each list */
+    list-style-type: none; /* Remove default bullet points */
+    padding-left: 0; /* Remove left padding */
+    margin-bottom: 20px; /* Spacing between lists */
+}
+
+.result li {
+    padding: 1px; /* Adjust padding for spacing */
+    background-color: transparent; /* Transparent background */
+    border: none; /* Remove border */
+    margin-bottom: 2px; /* Spacing between items */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
 .footer {
@@ -116,11 +174,17 @@ input[type="number"].dark-mode {
     background: none;
     border: none;
     cursor: pointer;
-    transition: transform 0.3s ease; /* Smooth transition */
+    transition: transform 0.2s ease, color 0.2s ease; /* Adjusted transition duration */
+    padding: 5px; /* Added padding for a better click area */
+}
+
+#darkModeButton img {
+    width: 24px; /* Set the image size to keep it consistent */
+    height: auto;
 }
 
 #darkModeButton:hover {
-    transform: scale(1.2); /* Expands the button to 120% of its original size */
+    transform: scale(1.1); /* Slightly less scale effect */
 }
 
 body.dark-mode h1 {
@@ -153,16 +217,15 @@ body.dark-mode {
     color: #e0e0e0; /* Change text color to off-white */
 }
 
-.dark-mode-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
+.result.dark-mode h2 {
+    color: #f9f9f9; /* Set header color to match the new line color */
 }
 
-.dark-mode-button img {
-    width: 24px;
-    height: auto;
+.result.dark-mode h2::after {
+    background: #f9f9f9; /* Color of the underline in dark mode */
+}
+
+/* Title Heart Color */
+.footer .heart {
+    color: red; /* Keep the heart red */
 }

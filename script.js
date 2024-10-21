@@ -16,6 +16,7 @@ const itemsByCategory = {
     'Vehicles': ['M1025 Light Armoured Vehicle', 'M151A2 Off-Road', 'M151A2 Off-Road Open Top', 'M923A1 Fuel Truck', 'M923A1 Transport Truck', 'M923A1 Transport Truck - Canopy', 
                 'M998 Light Utility Vehicle', 'M998 Light Utility Vehicle - Canopy', 'Mi-8MT Transport Helicopter', 'Pickup-Truck', 'S1203 Minibus', 'UAZ-452 Off-road', 'UAZ-469 Off-road', 'UAZ-469 Off-road - Open Top', 
                 'UH-1H Transport Helicopter', 'Ural-4320 Fuel Truck', 'Ural-4320 Transport Truck', 'Ural-4320 Transport Truck - Canopy', 'Ural (Device)', 'VW Rolf'],
+    'Vests':    ['6B2 Vest', '6B3 Vest', 'M69 Vest', 'PASGT Vest'], 
     'Helmets': ['PASGT Helmet', 'PASGT Helmet - Camouflaged', 'PASGT Helmet - Camouflaged Netting', 'SPH-4 Helmet', 'SSh-68 Helmet', 
                 'SSh-68 Helmet - Camouflaged', 'SSh-68 Helmet - Cover', 'SSh-68 Helmet - Netting', 'ZSh-5 Helmet'], 
     'Clothes': ['ALICE Medium Backpack', 'Bandana', 'BDU Blouse', 'BDU Trousers', 'Beanie', 'Cargo Pants',
@@ -589,83 +590,90 @@ function calculateResources() {
     const quantity = parseInt(document.getElementById('quantity').value);
 
     let totalResources = {}; // Object to store total resources needed
-    let totalComponents = {}; // Object to store total components needed
+    let totalComponents = {}; // Object to store total non-HQ components needed
     let totalHQComponents = {}; // Object to store total HQ components needed
 
-    // Get the components for the selected item from the appropriate category
     const selectedCategory = itemComponents[category];
     const itemData = selectedCategory[item];
 
-    // Calculate resources and components needed for non-HQ components
-    for (const component in itemData['Non-HQ']) {
-        const totalComponentQuantity = itemData['Non-HQ'][component] * quantity;
+    // Step 1: Calculate HQ components and their associated non-HQ components
+    if (itemData['HQ']) {
+        for (const hqComponent in itemData['HQ']) {
+            const hqQuantity = itemData['HQ'][hqComponent] * quantity;
 
-        // Calculate resources needed for the component
-        for (const resource in componentResources[component]) {
-            const resourcePerUnit = componentResources[component][resource];
-            const totalResourceQuantity = resourcePerUnit * totalComponentQuantity;
+            // Add HQ component totals
+            totalHQComponents[hqComponent] = (totalHQComponents[hqComponent] || 0) + hqQuantity;
 
-            // Add or update total resources object
-            if (!totalResources[resource]) {
-                totalResources[resource] = totalResourceQuantity;
-            } else {
-                totalResources[resource] += totalResourceQuantity;
+            // Step 2: Break down HQ components into non-HQ components (skip "Special Rotor")
+            if (hqComponent !== 'Special Rotor' && componentResources[hqComponent]) {
+                for (const nonHQComponent in componentResources[hqComponent]) {
+                    const nonHQQuantity = componentResources[hqComponent][nonHQComponent] * hqQuantity;
+
+                    // Add to total non-HQ components
+                    totalComponents[nonHQComponent] = (totalComponents[nonHQComponent] || 0) + nonHQQuantity;
+
+                    // Step 3: Calculate resources for these non-HQ components
+                    if (resourcesList.includes(nonHQComponent)) {
+                        totalResources[nonHQComponent] = (totalResources[nonHQComponent] || 0) + nonHQQuantity;
+                    } else if (componentResources[nonHQComponent]) {
+                        for (const resource in componentResources[nonHQComponent]) {
+                            const resourceQuantity = componentResources[nonHQComponent][resource] * nonHQQuantity;
+                            totalResources[resource] = (totalResources[resource] || 0) + resourceQuantity;
+                        }
+                    }
+                }
             }
         }
-
-        // Add or update total components object
-        totalComponents[component] = totalComponentQuantity;
     }
 
-    // Calculate resources and components needed for HQ components
-    for (const hqComponent in itemData['HQ']) {
-        const totalHQComponentQuantity = itemData['HQ'][hqComponent] * quantity;
+    // Step 4: Calculate non-HQ components and their resources directly
+    if (itemData['Non-HQ']) {
+        for (const nonHQComponent in itemData['Non-HQ']) {
+            const nonHQQuantity = itemData['Non-HQ'][nonHQComponent] * quantity;
 
-        // Calculate resources needed for the HQ component
-        for (const resource in componentResources[hqComponent]) {
-            const resourcePerUnit = componentResources[hqComponent][resource];
-            const totalResourceQuantity = resourcePerUnit * totalHQComponentQuantity;
+            // Add non-HQ component totals
+            totalComponents[nonHQComponent] = (totalComponents[nonHQComponent] || 0) + nonHQQuantity;
 
-            // Add or update total resources object
-            if (!totalResources[resource]) {
-                totalResources[resource] = totalResourceQuantity;
-            } else {
-                totalResources[resource] += totalResourceQuantity;
+            // Calculate resources for these non-HQ components
+            if (resourcesList.includes(nonHQComponent)) {
+                totalResources[nonHQComponent] = (totalResources[nonHQComponent] || 0) + nonHQQuantity;
+            } else if (componentResources[nonHQComponent]) {
+                for (const resource in componentResources[nonHQComponent]) {
+                    const resourceQuantity = componentResources[nonHQComponent][resource] * nonHQQuantity;
+                    totalResources[resource] = (totalResources[resource] || 0) + resourceQuantity;
+                }
             }
         }
-
-        // Add or update total HQ components object
-        totalHQComponents[hqComponent] = totalHQComponentQuantity;
     }
 
-    // Display the total resources
-    let resultHTML = '<h2>Resources needed:</h2>';
-    resultHTML += '<ul>';
+    // Step 5: Display the results
+    displayResults(totalResources, totalComponents, totalHQComponents);
+}
 
+function displayResults(totalResources, totalComponents, totalHQComponents) {
+    let resultHTML = '';
+
+    // Display resources needed
+    resultHTML += '<h2>Resources needed:</h2><ul>';
     for (const resource in totalResources) {
         resultHTML += `<li>${resource}: ${totalResources[resource]}</li>`;
     }
-
     resultHTML += '</ul>';
 
-    // Display the total components
-    resultHTML += '<h2>Components needed:</h2>';
-    resultHTML += '<ul>';
-
+    // Display non-HQ components needed (only non-HQ components, no resources like Copper, Iron, etc.)
+    resultHTML += '<h2>Components needed:</h2><ul>';
     for (const component in totalComponents) {
-        resultHTML += `<li>${component}: ${totalComponents[component]}</li>`;
+        if (!resourcesList.includes(component) && component !== 'Special Rotor') {  // Ensure components like Mechanical Component, Interior Part, etc. Skip "Special Rotor"
+            resultHTML += `<li>${component}: ${totalComponents[component]}</li>`;
+        }
     }
-
     resultHTML += '</ul>';
 
-    // Display the total HQ components
-    resultHTML += '<h2>HQ Components needed:</h2>';
-    resultHTML += '<ul>';
-
+    // Display HQ components needed (including "Special Rotor")
+    resultHTML += '<h2>HQ Components needed:</h2><ul>';
     for (const hqComponent in totalHQComponents) {
         resultHTML += `<li>${hqComponent}: ${totalHQComponents[hqComponent]}</li>`;
     }
-
     resultHTML += '</ul>';
 
     document.getElementById('result').innerHTML = resultHTML;
