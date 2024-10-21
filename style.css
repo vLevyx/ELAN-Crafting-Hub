@@ -88,14 +88,61 @@ h1::after {
     font-weight: bold;
 }
 
+/* General Select Box Styling for Desktop */
 .select-box {
     width: 100%;
+    max-width: 100%; /* Limits the width on larger screens */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     background-color: #f9f9f9;
     transition: border-color 0.3s ease;
+}
+
+/* Mobile Optimization - Match styling for smaller screens */
+@media (max-width: 768px) {
+    .select-box {
+        width: 100%; /* Use the full width of the screen */
+        max-width: 100%; /* Ensure no maximum width is set */
+        padding: 12px; /* Slightly increased padding for touch interaction */
+        font-size: 18px; /* Increase font size for better readability */
+    }
+    
+    .form-group {
+        margin-bottom: 15px; /* Reduce margins for tighter space on mobile */
+    }
+
+    .crafting-level {
+        width: 100%; /* Ensure the crafting level box also takes full width */
+        height: 44px; /* Maintain height consistency */
+        padding: 12px; /* Adjust padding for touch interaction */
+        margin-top: 10px; /* Add spacing between boxes */
+    }
+
+    /* Ensuring container takes full width on mobile */
+    .container {
+        width: 100%;
+        padding: 15px;
+        margin: 0;
+    }
+}
+
+/* For very small screens (e.g., phones in portrait mode) */
+@media (max-width: 480px) {
+    .select-box {
+        font-size: 16px; /* Reduce font size slightly */
+        padding: 10px; /* Slight padding adjustment */
+    }
+
+    .crafting-level {
+        font-size: 16px; /* Ensure consistent text size in smaller screens */
+        padding: 10px; /* Adjust padding */
+    }
+
+    .container {
+        padding: 10px; /* Slightly less padding on the container */
+    }
 }
 
 .select-box:hover,
