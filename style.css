@@ -145,6 +145,33 @@ h1::after {
     }
 }
 
+/* Adjust h1 header size for mobile screens */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem; /* Reduce font size for mobile */
+    }
+
+    /* Adjust the text position inside the crafting-level box */
+    .crafting-level {
+        padding: 8px 12px; /* Reduce padding slightly to make more space */
+        line-height: 1.2;  /* Adjust line-height for better text positioning */
+    }
+}
+
+/* Further adjustments for very small screens (e.g., phones in portrait mode) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.3rem; /* Further reduce the font size for very small screens */
+    }
+
+    /* Additional adjustment for crafting-level box */
+    .crafting-level {
+        font-size: 16px;  /* Make the font size a bit smaller */
+        padding: 6px 10px; /* Reduce padding even more */
+        line-height: 1.1;  /* Ensure proper text alignment */
+    }
+}
+
 .select-box:hover,
 .select-box:focus {
     border-color: #007bff;
