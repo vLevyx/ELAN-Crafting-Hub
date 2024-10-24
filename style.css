@@ -355,26 +355,41 @@ body.dark-mode {
     text-align: center; /* Center the button */
 }
 
-/* Breakdown section with its own container style */
+/* Default styles for light mode */
 #breakdownSection {
     margin-top: 20px;
     padding: 15px;
-    background-color: #666; /* Dark background for contrast in dark mode */
-    border: 1px solid #444; /* Darker border to match the dark theme */
+    background-color: #f9f9f9; /* Light background for light mode */
+    border: 1px solid #ccc; /* Light border for light mode */
     border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Stronger shadow for better visibility in dark mode */
-    color: #f1f1f1; /* Light text color for readability */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for light mode */
+    color: #333; /* Dark text color for readability in light mode */
 }
 
-/* Ensure any links or list items inside are also visible in dark mode */
+/* Light mode styles for list items */
 #breakdownSection ul li {
-    color: #f1f1f1; /* Light text color for list items */
+    color: #333; /* Dark text color for list items in light mode */
 }
 
 #breakdownSection h3 {
-    color: #e0e0e0; /* Slightly darker shade for headings */
+    color: #555; /* Darker shade for headings in light mode */
     margin-top: 10px;
     font-weight: bold;
+}
+
+/* Dark mode styles */
+.dark-mode #breakdownSection {
+    background-color: #666; /* Dark background for contrast in dark mode */
+    border: 1px solid #444; /* Darker border to match the dark theme */
+    color: #f1f1f1; /* Light text color for readability in dark mode */
+}
+
+.dark-mode #breakdownSection ul li {
+    color: #f1f1f1; /* Light text color for list items in dark mode */
+}
+
+.dark-mode #breakdownSection h3 {
+    color: #e0e0e0; /* Slightly darker shade for headings in dark mode */
 }
 
 

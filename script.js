@@ -27,7 +27,10 @@ const itemsByCategory = {
                 'Soviet Pilot Jacket', 'Soviet Pilot Pants', 'Sweater', 'Sweat Pants', 'TShirt', 'US Combat Boots',
                 'Veshmeshok Backpack', 'Wool Hat'],
 'HQ Components': ['Ammo (HQ)', 'Attachment Part (HQ)', 'Component (HQ)', 'Engine Part (HQ)', 'Interior Part (HQ)', 
-                'Mechanical Component (HQ)', 'Rotor (HQ)', 'Stabilizer (HQ)', 'Weapon Part (HQ)']
+                'Mechanical Component (HQ)', 'Rotor (HQ)', 'Stabilizer (HQ)', 'Weapon Part (HQ)'],
+    'Components': ['Cloth', 'Iron Plate', 'Kevlar', 'Component', 'Tempered Glass', 'Weapon Part', 'Stabilizer', 'Attachment Part', 
+                'Ammo', 'Mechanical Component', 'Engine Part', 'Interior Part', 'Rotor']
+
 };
 
 // Crafting levels for each item
@@ -78,11 +81,11 @@ const craftingLevels = {
     'M923A1 Fuel Truck': 8,
     'M923A1 Transport Truck': 7,
     'M923A1 Transport Truck - Canopy': 8,
-    'M998 Light Utility Vehicle': 9999,
+    'M998 Light Utility Vehicle': 6,
     'M998 Light Utility Vehicle - Canopy': 8,
     'Mi-8MT Transport Helicopter': 12,
     'Pickup-Truck': 7,
-    'S1203 Minibus': 9999,
+    'S1203 Minibus': 5,
     'UAZ-452 Off-road': 5,
     'UAZ-469 Off-road': 3,
     'UAZ-469 Off-road - Open Top': 3,
@@ -97,7 +100,7 @@ const craftingLevels = {
     'M69 Vest': 7,
     'PASGT Vest': 7,
     'PASGT Helmet': 4,
-    'PASGT Helmet - Camouflaged': 9999,
+    'PASGT Helmet - Camouflaged': 4,
     'PASGT Helmet - Camouflaged Netting': 4,
     'SPH-4 Helmet': 6,
     'SSh-68 Helmet': 4,
@@ -637,7 +640,8 @@ const itemComponents = {
             'Wool Hat': {
                 'Non-HQ': { 'Cloth': 50 },
                 'HQ': {}
-            },
+            }
+    },
     'HQ Components': {
             'Ammo (HQ)': {
                 'Resources': {'Petrol': 1},
@@ -650,36 +654,109 @@ const itemComponents = {
                 'HQ': {}
             },
             'Component (HQ)': {
-                'Non-HQ': {},
-                'HQ': { 'Component': 2, 'Gold Ingot': 15 }
+                'Resources': { 'Gold Ingot': 15 },
+                'Non-HQ': { 'Component': 2 },
+                'HQ': {}
             },
             'Engine Part (HQ)': {
-                'Non-HQ': {},
-                'HQ': { 'Engine Part': 9, 'Copper Ingot': 45, 'Petrol': 45 }
+                'Resources': { 'Copper Ingot': 45, 'Petrol': 45 },
+                'Non-HQ': { 'Engine Part': 9 },
+                'HQ': {}
             },
             'Interior Part (HQ)': {
-                'Non-HQ': {},
-                'HQ': { 'Interior Part': 9, 'Wooden Plank': 45 }
+                'Resources': { 'Wooden Plank': 45 },
+                'Non-HQ': { 'Interior Part': 9 },
+                'HQ': {}
             },
             'Mechanical Component (HQ)': {
-                'Non-HQ': {},
-                'HQ': { 'Mechanical Component': 9, 'Gold Ingot': 45 }
+                'Resources': { 'Gold Ingot': 45 },
+                'Non-HQ': { 'Mechanical Component': 9 },
+                'HQ': {}
             },
             'Rotor (HQ)': {
-                'Non-HQ': {},
-                'HQ': { 'Rotor': 9, 'Silver Ingot': 30 }
+                'Resources': { 'Silver Ingot': 30 },
+                'Non-HQ': { 'Rotor': 9 },
+                'HQ': {}
             },
             'Stabilizer (HQ)': {
-                'Non-HQ': {},
-                'HQ': { 'Stabilizer': 3, 'Polyester': 15 }
+                'Resources': { 'Polyester': 15 },
+                'Non-HQ': {'Stabilizer': 3 },
+                'HQ': {}
             },
             'Weapon Part (HQ)': {
-                'Non-HQ': {},
-                'HQ': { 'Weapon Part': 3, 'Iron Ingot': 15, 'Copper Ingot': 15 }
+                'Resources': { 'Iron Ingot': 15, 'Copper Ingot': 15 },
+                'Non-HQ': {'Weapon Part': 3 },
+                'HQ': {}
             }
-        }
-    }
-};
+    },
+    'Components': {
+            'Cloth': {
+                'Resources': { 'Fabric': 1, 'Polyester': 1 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Iron Plate': {
+                'Resources': { 'Iron Ingot': 1, 'Fabric': 1, 'Polyester': 1 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Kevlar': {
+                'Resources': { 'Iron Plate': 1, 'Iron Ingot': 3 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Component': {
+                'Resources': { 'Iron Ingot': 1, 'Copper Ingot': 1 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Tempered Glass': {
+                'Resources': { 'Glass': 2, 'Polyester': 1 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Weapon Part': {
+                'Resources': { 'Iron Ingot': 1, 'Copper Ingot': 1 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Stabilizer': {
+                'Resources': { 'Iron Ingot': 2, 'Gold Ingot': 1 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Attachment Part': {
+                'Resources': { 'Copper Ingot': 2, 'Silver Ingot': 1 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Ammo': {
+                'Resources': { 'Iron Ingot': 1, 'Charcoal': 1 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Mechanical Component': {
+                'Resources': { 'Iron Ingot': 2, 'Copper Ingot': 2 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Engine Part': {
+                'Resources': { 'Iron Ingot': 1, 'Copper Ingot': 1, 'Petrol': 1 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Interior Part': {
+                'Resources': { 'Fabric': 2, 'Polyester': 2 },
+                'Non-HQ': {},
+                'HQ': {}
+            },
+            'Rotor': {
+                'Resources': { 'Charcoal': 1, 'Polyester': 1 },
+                'Non-HQ': {},
+                'HQ': {}
+            }
+    },
+}
 
 const componentResources = {
     'Cloth': { 'Fabric': 1, 'Polyester': 1 },
@@ -773,6 +850,14 @@ function calculateResources() {
                     }
                 }
             }
+        }
+    }
+
+    // Step 3: Include the direct HQ 'Resources' into totalResources
+    if (itemData['Resources']) {
+        for (const resource in itemData['Resources']) {
+            const resourceQuantity = itemData['Resources'][resource] * quantity;
+            totalResources[resource] = (totalResources[resource] || 0) + resourceQuantity;
         }
     }
 
