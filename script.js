@@ -25,7 +25,9 @@ const itemsByCategory = {
                 'M70 Trousers', 'M88 Field Cap', 'M88 Jacket', 'M88 Trousers', 'Mask (Medical)', 'Officer\'s Cap',
                 'Panamka', 'Paper Bag', 'Polo', 'Pullover', 'Runner Shoe', 'Sneaker', 'Soviet Combat Boots',
                 'Soviet Pilot Jacket', 'Soviet Pilot Pants', 'Sweater', 'Sweat Pants', 'TShirt', 'US Combat Boots',
-                'Veshmeshok Backpack', 'Wool Hat']
+                'Veshmeshok Backpack', 'Wool Hat'],
+'HQ Components': ['Ammo (HQ)', 'Attachment Part (HQ)', 'Component (HQ)', 'Engine Part (HQ)', 'Interior Part (HQ)', 
+                'Mechanical Component (HQ)', 'Rotor (HQ)', 'Stabilizer (HQ)', 'Weapon Part (HQ)']
 };
 
 // Crafting levels for each item
@@ -54,22 +56,55 @@ const craftingLevels = {
     'SR-25 Rifle': 11,
     'SVD': 10,
     '5.45x39mm 30rnd AK Mag': 8,
-    '5.45x39mm 45rnd RPK-74 Tracer Mag': 9999,
+    '5.45x39mm 45rnd RPK-74 Tracer Mag': 10,
     '5.56x45mm 200rnd M249 Belt': 11,
     '5.56x45mm 30rnd STANAG Mag': 5,
-    '7.62x39mm 30rnd Sa-58 Mag': 9999,
-    '7.62x51mm M80 Mag': 9999,
-    '7.62x51mm 20rnd M14 Mag': 9999,
-    '7.62x54mmR 10rnd SVD Mag': 9999,
+    '7.62x39mm 30rnd Sa-58 Mag': 9,
+    '7.62x51mm M80 Mag': 10,
+    '7.62x51mm 20rnd M14 Mag': 7,
+    '7.62x54mmR 10rnd SVD Mag': 10,
     '7.62x54mmR 100rnd PK Belt': 12,
-    '8rnd .45 ACP': 9999,
+    '8rnd .45 ACP': 4,
     '9x18mm 8rnd PM Mag': 2,
     '9x19mm 15rnd M9 Mag': 3,
-    '30rnd 9x19 Mag': 9999,
+    '30rnd 9x19 Mag': 5,
     'ART II Scope': 7,
     'Carry Handle Red-Dot-Sight': 7,
     'PSO-1 Scope': 7,
     '4x20 Carry Handle Scope': 5,
+    'M1025 Light Armoured Vehicle': 7,
+    'M151A2 Off-Road': 4,
+    'M151A2 Off-Road Open Top': 4,
+    'M923A1 Fuel Truck': 8,
+    'M923A1 Transport Truck': 7,
+    'M923A1 Transport Truck - Canopy': 8,
+    'M998 Light Utility Vehicle': 9999,
+    'M998 Light Utility Vehicle - Canopy': 8,
+    'Mi-8MT Transport Helicopter': 12,
+    'Pickup-Truck': 7,
+    'S1203 Minibus': 9999,
+    'UAZ-452 Off-road': 5,
+    'UAZ-469 Off-road': 3,
+    'UAZ-469 Off-road - Open Top': 3,
+    'UH-1H Transport Helicopter': 11,
+    'Ural-4320 Fuel Truck': 9,
+    'Ural-4320 Transport Truck': 9,
+    'Ural-4320 Transport Truck - Canopy': 10,
+    'Ural (Device)': 13,
+    'VW Rolf': 7,
+    '6B2 Vest': 7,
+    '6B3 Vest': 9,
+    'M69 Vest': 7,
+    'PASGT Vest': 7,
+    'PASGT Helmet': 4,
+    'PASGT Helmet - Camouflaged': 9999,
+    'PASGT Helmet - Camouflaged Netting': 4,
+    'SPH-4 Helmet': 6,
+    'SSh-68 Helmet': 4,
+    'SSh-68 Helmet - Camouflaged': 4,
+    'SSh-68 Helmet - Cover': 4,
+    'SSh-68 Helmet - Netting': 4,
+    'ZSh-5 Helmet': 6
     // Add more items as needed
 };
 
@@ -602,9 +637,49 @@ const itemComponents = {
             'Wool Hat': {
                 'Non-HQ': { 'Cloth': 50 },
                 'HQ': {}
+            },
+    'HQ Components': {
+            'Ammo (HQ)': {
+                'Resources': {'Petrol': 1},
+                'Non-HQ': {'Ammo': 3},
+                'HQ': {}
+            },
+            'Attachment Part (HQ)': {
+                'Resources': {'Wooden Plank': 15},
+                'Non-HQ': { 'Attachment Part': 3},
+                'HQ': {}
+            },
+            'Component (HQ)': {
+                'Non-HQ': {},
+                'HQ': { 'Component': 2, 'Gold Ingot': 15 }
+            },
+            'Engine Part (HQ)': {
+                'Non-HQ': {},
+                'HQ': { 'Engine Part': 9, 'Copper Ingot': 45, 'Petrol': 45 }
+            },
+            'Interior Part (HQ)': {
+                'Non-HQ': {},
+                'HQ': { 'Interior Part': 9, 'Wooden Plank': 45 }
+            },
+            'Mechanical Component (HQ)': {
+                'Non-HQ': {},
+                'HQ': { 'Mechanical Component': 9, 'Gold Ingot': 45 }
+            },
+            'Rotor (HQ)': {
+                'Non-HQ': {},
+                'HQ': { 'Rotor': 9, 'Silver Ingot': 30 }
+            },
+            'Stabilizer (HQ)': {
+                'Non-HQ': {},
+                'HQ': { 'Stabilizer': 3, 'Polyester': 15 }
+            },
+            'Weapon Part (HQ)': {
+                'Non-HQ': {},
+                'HQ': { 'Weapon Part': 3, 'Iron Ingot': 15, 'Copper Ingot': 15 }
             }
         }
-    };
+    }
+};
 
 const componentResources = {
     'Cloth': { 'Fabric': 1, 'Polyester': 1 },

@@ -359,21 +359,28 @@ body.dark-mode {
 #breakdownSection {
     margin-top: 20px;
     padding: 15px;
-    background-color: #f9f9f9; /* Light background for contrast */
-    border: 1px solid #ddd; /* Light border for separation */
+    background-color: #666; /* Dark background for contrast in dark mode */
+    border: 1px solid #444; /* Darker border to match the dark theme */
     border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Stronger shadow for better visibility in dark mode */
+    color: #f1f1f1; /* Light text color for readability */
 }
+
+/* Ensure any links or list items inside are also visible in dark mode */
+#breakdownSection ul li {
+    color: #f1f1f1; /* Light text color for list items */
+}
+
+#breakdownSection h3 {
+    color: #e0e0e0; /* Slightly darker shade for headings */
+    margin-top: 10px;
+    font-weight: bold;
+}
+
 
 /* Hidden class for hiding breakdown sections */
 .hidden {
     display: none;
-}
-
-/* Style the individual breakdown component lists */
-#breakdownSection h3 {
-    margin-top: 10px;
-    font-weight: bold;
 }
 
 /* Title Heart Color */
