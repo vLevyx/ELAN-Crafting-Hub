@@ -7,7 +7,7 @@ const componentsList = ['Cloth', 'Iron Plate', 'Kevlar', 'Component', 'Tempered 
 const hqComponentsList = ['Component (HQ)', 'Weapon Part (HQ)', 'Stabilizer (HQ)', 'Attachment Part (HQ)', 'Ammo (HQ)', 'Mechanical Component (HQ)', 'Engine Part (HQ)', 'Interior Part (HQ)', 'Rotor (HQ)', 'Special Rotor', 'Special Gun Barrel'];
 
 const itemsByCategory = {
-    'Weapons': ['AK-47', 'Colt 1911', 'Desert Eagle', 'M16A2', 'M16A2 - AUTO', 'M21 SWS', 'M249 SAW', 'M416', 'M9', 'MP5A2', 'MP7A2', 'PKM', 'PM', 'RPK-74', 
+    'Weapons':  ['AK-47', 'Colt 1911', 'Desert Eagle', 'M16A2', 'M16A2 - AUTO', 'M21 SWS', 'M249 SAW', 'M416', 'M9', 'MP5A2', 'MP7A2', 'PKM', 'PM', 'RPK-74', 
                 'S8-58V', 'Sa-58P', 'Scar-H', 'SIG MCX', 'SIG MCX SPEAR', 'SSG10A2-Sniper', 'Stegr AUG', 'SR-25 Rifle', 'SVD'],
     'Magazines': ['5.45x39mm 30rnd AK Mag', '5.45x39mm 45rnd RPK-74 Tracer Mag', '5.56x45mm 200rnd M249 Belt', '5.56x45mm 30rnd STANAG Mag',
                 '7.62x54mmR 100rnd PK Belt', '7.62x39mm 30rnd Sa-58 Mag', '7.62x51mm M80 Mag', '7.62x51mm 20rnd M14 Mag', '7.62x54mmR 10rnd SVD Mag', '8rnd .45 ACP', '9x18mm 8rnd PM Mag',
@@ -17,9 +17,9 @@ const itemsByCategory = {
                 'M998 Light Utility Vehicle', 'M998 Light Utility Vehicle - Canopy', 'Mi-8MT Transport Helicopter', 'Pickup-Truck', 'S1203 Minibus', 'UAZ-452 Off-road', 'UAZ-469 Off-road', 'UAZ-469 Off-road - Open Top', 
                 'UH-1H Transport Helicopter', 'Ural-4320 Fuel Truck', 'Ural-4320 Transport Truck', 'Ural-4320 Transport Truck - Canopy', 'Ural (Device)', 'VW Rolf'],
     'Vests':    ['6B2 Vest', '6B3 Vest', 'M69 Vest', 'PASGT Vest'], 
-    'Helmets': ['PASGT Helmet', 'PASGT Helmet - Camouflaged', 'PASGT Helmet - Camouflaged Netting', 'SPH-4 Helmet', 'SSh-68 Helmet', 
+    'Helmets':  ['PASGT Helmet', 'PASGT Helmet - Camouflaged', 'PASGT Helmet - Camouflaged Netting', 'SPH-4 Helmet', 'SSh-68 Helmet', 
                 'SSh-68 Helmet - Camouflaged', 'SSh-68 Helmet - Cover', 'SSh-68 Helmet - Netting', 'ZSh-5 Helmet'], 
-    'Clothes': ['ALICE Medium Backpack', 'Bandana', 'BDU Blouse', 'BDU Trousers', 'Beanie', 'Cargo Pants',
+    'Clothes':  ['ALICE Medium Backpack', 'Bandana', 'BDU Blouse', 'BDU Trousers', 'Beanie', 'Cargo Pants',
                 'Cardigan', 'Classic Shoe', 'CWU-27 Pilot Coveralls', 'Dress', 'Fedora', 'Fisher Hat', 'Flat Cap', 'Hunting Vest',
                 'Jacket', 'Jeans', 'KLMK Coveralls', 'Knit Cap', 'Kolobok Backpack', 'M70 Backpack', 'M70 Cap', 'M70 Parka',
                 'M70 Trousers', 'M88 Field Cap', 'M88 Jacket', 'M88 Trousers', 'Mask (Medical)', 'Officer\'s Cap',
@@ -656,6 +656,8 @@ function calculateResources() {
     let totalResources = {}; // Object to store total resources needed
     let totalComponents = {}; // Object to store total non-HQ components needed
     let totalHQComponents = {}; // Object to store total HQ components needed
+    let hqComponentBreakdown = {}; // Object to store resources breakdown by HQ component
+    let nonHQComponentBreakdown = {}; // Object to store resources breakdown by non-HQ component
 
     const selectedCategory = itemComponents[category];
     const itemData = selectedCategory[item];
@@ -668,6 +670,9 @@ function calculateResources() {
             // Add HQ component totals
             totalHQComponents[hqComponent] = (totalHQComponents[hqComponent] || 0) + hqQuantity;
 
+            // Initialize breakdown for this HQ component
+            hqComponentBreakdown[hqComponent] = hqComponentBreakdown[hqComponent] || {};
+
             // Step 2: Break down HQ components into non-HQ components (skip "Special Rotor")
             if (hqComponent !== 'Special Rotor' && componentResources[hqComponent]) {
                 for (const nonHQComponent in componentResources[hqComponent]) {
@@ -676,13 +681,19 @@ function calculateResources() {
                     // Add to total non-HQ components
                     totalComponents[nonHQComponent] = (totalComponents[nonHQComponent] || 0) + nonHQQuantity;
 
-                    // Step 3: Calculate resources for these non-HQ components
+                    // Calculate resources for these non-HQ components
                     if (resourcesList.includes(nonHQComponent)) {
                         totalResources[nonHQComponent] = (totalResources[nonHQComponent] || 0) + nonHQQuantity;
+
+                        // Add to breakdown by HQ component
+                        hqComponentBreakdown[hqComponent][nonHQComponent] = (hqComponentBreakdown[hqComponent][nonHQComponent] || 0) + nonHQQuantity;
                     } else if (componentResources[nonHQComponent]) {
                         for (const resource in componentResources[nonHQComponent]) {
                             const resourceQuantity = componentResources[nonHQComponent][resource] * nonHQQuantity;
                             totalResources[resource] = (totalResources[resource] || 0) + resourceQuantity;
+
+                            // Add to breakdown by HQ component
+                            hqComponentBreakdown[hqComponent][resource] = (hqComponentBreakdown[hqComponent][resource] || 0) + resourceQuantity;
                         }
                     }
                 }
@@ -698,23 +709,32 @@ function calculateResources() {
             // Add non-HQ component totals
             totalComponents[nonHQComponent] = (totalComponents[nonHQComponent] || 0) + nonHQQuantity;
 
+            // Initialize breakdown for this non-HQ component
+            nonHQComponentBreakdown[nonHQComponent] = nonHQComponentBreakdown[nonHQComponent] || {};
+
             // Calculate resources for these non-HQ components
             if (resourcesList.includes(nonHQComponent)) {
                 totalResources[nonHQComponent] = (totalResources[nonHQComponent] || 0) + nonHQQuantity;
+
+                // Add to breakdown by non-HQ component
+                nonHQComponentBreakdown[nonHQComponent][nonHQComponent] = (nonHQComponentBreakdown[nonHQComponent][nonHQComponent] || 0) + nonHQQuantity;
             } else if (componentResources[nonHQComponent]) {
                 for (const resource in componentResources[nonHQComponent]) {
                     const resourceQuantity = componentResources[nonHQComponent][resource] * nonHQQuantity;
                     totalResources[resource] = (totalResources[resource] || 0) + resourceQuantity;
+
+                    // Add to breakdown by non-HQ component
+                    nonHQComponentBreakdown[nonHQComponent][resource] = (nonHQComponentBreakdown[nonHQComponent][resource] || 0) + resourceQuantity;
                 }
             }
         }
     }
 
     // Step 5: Display the results
-    displayResults(totalResources, totalComponents, totalHQComponents);
+    displayResults(totalResources, totalComponents, totalHQComponents, hqComponentBreakdown, nonHQComponentBreakdown);
 }
 
-function displayResults(totalResources, totalComponents, totalHQComponents) {
+function displayResults(totalResources, totalComponents, totalHQComponents, hqComponentBreakdown, nonHQComponentBreakdown) {
     let resultHTML = '';
 
     // Display resources needed
@@ -724,21 +744,69 @@ function displayResults(totalResources, totalComponents, totalHQComponents) {
     }
     resultHTML += '</ul>';
 
-    // Display non-HQ components needed (only non-HQ components, no resources like Copper, Iron, etc.)
+    // Display non-HQ components needed
     resultHTML += '<h2>Components needed:</h2><ul>';
     for (const component in totalComponents) {
-        if (!resourcesList.includes(component) && component !== 'Special Rotor') {  // Ensure components like Mechanical Component, Interior Part, etc. Skip "Special Rotor"
+        if (!resourcesList.includes(component) && component !== 'Special Rotor') {
             resultHTML += `<li>${component}: ${totalComponents[component]}</li>`;
         }
     }
     resultHTML += '</ul>';
 
-    // Display HQ components needed (including "Special Rotor")
-    resultHTML += '<h2>HQ Components needed:</h2><ul>';
-    for (const hqComponent in totalHQComponents) {
-        resultHTML += `<li>${hqComponent}: ${totalHQComponents[hqComponent]}</li>`;
+    // Display HQ components needed
+    if (Object.keys(totalHQComponents).length > 0) {
+        resultHTML += '<h2>HQ Components needed:</h2><ul>';
+        for (const hqComponent in totalHQComponents) {
+            resultHTML += `<li>${hqComponent}: ${totalHQComponents[hqComponent]}</li>`;
+        }
+        resultHTML += '</ul>';
     }
-    resultHTML += '</ul>';
+
+    // Breakdown section with its own container
+    resultHTML += '<div id="breakdownSection" class="hidden">';
+
+    // Display breakdown of resources by HQ component
+    if (Object.keys(hqComponentBreakdown).length > 0) {
+        resultHTML += '<h2>Resources by HQ Component:</h2>';
+        for (const hqComponent in hqComponentBreakdown) {
+            resultHTML += `<h3>${hqComponent}:</h3><ul>`;
+            for (const resource in hqComponentBreakdown[hqComponent]) {
+                resultHTML += `<li>${resource}: ${hqComponentBreakdown[hqComponent][resource]}</li>`;
+            }
+            resultHTML += '</ul>';
+        }
+    }
+
+    // Display breakdown of resources by Non-HQ component
+    if (Object.keys(nonHQComponentBreakdown).length > 0) {
+        resultHTML += '<h2>Resources by Component:</h2>';
+        for (const nonHQComponent in nonHQComponentBreakdown) {
+            resultHTML += `<h3>${nonHQComponent}:</h3><ul>`;
+            for (const resource in nonHQComponentBreakdown[nonHQComponent]) {
+                resultHTML += `<li>${resource}: ${nonHQComponentBreakdown[nonHQComponent][resource]}</li>`;
+            }
+            resultHTML += '</ul>';
+        }
+    }
+
+    resultHTML += '</div>'; // Close breakdown section
 
     document.getElementById('result').innerHTML = resultHTML;
+
+    // Set the initial state of the breakdown section
+    document.getElementById('breakdownSection').style.display = 'none'; // Start hidden
+}
+
+function toggleBreakdown() {
+    const breakdownSection = document.getElementById('breakdownSection');
+    const toggleButton = document.getElementById('toggleBreakdownBtn');
+
+    // Toggle the visibility of the breakdown section
+    if (breakdownSection.style.display === 'none') {
+        breakdownSection.style.display = 'block';
+        toggleButton.textContent = 'Hide Breakdown';
+    } else {
+        breakdownSection.style.display = 'none';
+        toggleButton.textContent = 'Show Breakdown';
+    }
 }
