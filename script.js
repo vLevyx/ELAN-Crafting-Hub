@@ -19,11 +19,11 @@ const itemsByCategory = {
     'Vests':    ['6B2 Vest', '6B3 Vest', 'M69 Vest', 'PASGT Vest'], 
     'Helmets':  ['PASGT Helmet', 'PASGT Helmet - Camouflaged', 'PASGT Helmet - Camouflaged Netting', 'SPH-4 Helmet', 'SSh-68 Helmet', 
                 'SSh-68 Helmet - Camouflaged', 'SSh-68 Helmet - Cover', 'SSh-68 Helmet - Netting', 'ZSh-5 Helmet'], 
-    'Clothes':  ['ALICE Medium Backpack', 'Bandana', 'BDU Blouse', 'BDU Trousers', 'Beanie', 'Cargo Pants',
-                'Cardigan', 'Classic Shoe', 'CWU-27 Pilot Coveralls', 'Dress', 'Fedora', 'Fisher Hat', 'Flat Cap', 'Hunting Vest',
-                'Jacket', 'Jeans', 'KLMK Coveralls', 'Knit Cap', 'Kolobok Backpack', 'M70 Backpack', 'M70 Cap', 'M70 Parka',
-                'M70 Trousers', 'M88 Field Cap', 'M88 Jacket', 'M88 Trousers', 'Mask (Medical)', 'Officer\'s Cap',
-                'Panamka', 'Paper Bag', 'Polo', 'Pullover', 'Runner Shoe', 'Sneaker', 'Soviet Combat Boots',
+    'Clothes':  ['ALICE Medium Backpack', 'Bandana', 'Balaclava', 'BDU Blouse', 'BDU Blouse - Rolled-up', 'BDU Trousers', 'Beanie', 'Boonie', 'Cargo Pants', 'Cargo Pants (Colored)',
+                'Cardigan', 'Classic Shoe', 'CWU-27 Pilot Coveralls', 'Dress', 'Fedora', 'Fisher Hat', 'Flat Cap', 'Half Mask', 'Hunting Vest',
+                'Jacket', 'Jeans', 'Jeans (Colored)', 'KLMK Coveralls', 'Knit Cap', 'Kolobok Backpack', 'M70 Backpack', 'M70 Cap', 'M70 Parka',
+                'M70 Trousers', 'M88 Field Cap', 'M88 Jacket', 'M88 Jacket - Rolled-up', 'M88 Trousers', 'Mask (Medical)', 'Mask (Latex)', 'Mask (Ski)', 'Officer\'s Cap',
+                'Panamka', 'Paper Bag', 'Polo', 'Pullover', 'Robe', 'Runner Shoe', 'Sneaker', 'Soviet Combat Boots',
                 'Soviet Pilot Jacket', 'Soviet Pilot Pants', 'Sweater', 'Sweat Pants', 'TShirt', 'US Combat Boots',
                 'Veshmeshok Backpack', 'Wool Hat'],
 'HQ Components': ['Ammo (HQ)', 'Attachment Part (HQ)', 'Component (HQ)', 'Engine Part (HQ)', 'Interior Part (HQ)', 
@@ -40,7 +40,7 @@ const craftingLevels = {
     'Desert Eagle': 10,
     'M16A2': 5,
     'M16A2 - AUTO': 6,
-    'M21 SWS': 9999,
+    'M21 SWS': 7,
     'M249 SAW': 11,
     'M416': 7,
     'M9': 3,
@@ -107,8 +107,61 @@ const craftingLevels = {
     'SSh-68 Helmet - Camouflaged': 4,
     'SSh-68 Helmet - Cover': 4,
     'SSh-68 Helmet - Netting': 4,
-    'ZSh-5 Helmet': 6
-    // Add more items as needed
+    'ZSh-5 Helmet': 6,
+    'ALICE Medium Backpack': 4,
+    'Bandana': 3,
+    'Balaclava': 3,
+    'BDU Blouse': 2,
+    'BDU Blouse - Rolled-up': 2,
+    'BDU Trousers': 2,
+    'Beanie': 4,
+    'Boonie': 4,
+    'Cargo Pants': 3,
+    'Cargo Pants (Colored)': 4,
+    'Cardigan': 3,
+    'Classic Shoe': 4,
+    'CWU-27 Pilot Coveralls': 6,
+    'Dress': 5,
+    'Fedora': 3,
+    'Fisher Hat': 3,
+    'Flat Cap': 3,
+    'Half Mask': 3,
+    'Hunting Vest': 3,
+    'Jacket': 4,
+    'Jeans': 3,
+    'Jeans (Colored)': 4,
+    'KLMK Coveralls': 6, 
+    'Knit Cap': 1,
+    'Kolobok Backpack': 2,
+    'M70 Backpack': 5,
+    'M70 Cap': 3,
+    'M70 Parka': 3,
+    'M70 Trousers': 3,
+    'M88 Field Cap': 2,
+    'M88 Jacket': 1,
+    'M88 Jacket - Rolled-up': 1,
+    'M88 Trousers': 1,
+    'Mask (Medical)': 5,
+    'Mask (Latex)': 5,
+    'Mask (Ski)': 3,
+    'Officer\'s Cap': 7, 
+    'Panamka': 2,
+    'Paper Bag': 5,
+    'Polo': 4,
+    'Pullover': 4,
+    'Robe': 5,
+    'Runner Shoe': 4,
+    'Sneaker': 4,
+    'Soviet Combat Boots': 1,
+    'Soviet Pilot Jacket': 6,
+    'Soviet Pilot Pants': 6,
+    'Sweater': 3,
+    'Sweat Pants': 4,
+    'TShirt': 4,
+    'US Combat Boots': 1,
+    'Veshmeshok Backpack': 3,
+    'Wool Hat': 5,
+    // End of Crafting Levels
 };
 
 // Function to calculate and display the crafting level
@@ -174,7 +227,7 @@ const itemComponents = {
             'HQ': {}
         },
         'M21 SWS': {
-            'Non-HQ': { 'Weapon Part': 39, 'Stabilizer': 31, 'Attachment Part': 24 },
+            'Non-HQ': { 'Weapon Part': 39, 'Stabilizer': 21, 'Attachment Part': 24 },
             'HQ': {}
         },
         'M249 SAW': {
@@ -476,8 +529,16 @@ const itemComponents = {
             'Bandana': {
                 'Non-HQ': { 'Cloth': 1 },
                 'HQ': {}
+            },               
+            'Balaclava': {
+                'Non-HQ': { 'Cloth': 1 },
+                'HQ': {}
             },
             'BDU Blouse': {
+                'Non-HQ': { 'Cloth': 1 },
+                'HQ': {}
+            },
+            'BDU Blouse - Rolled-up': {
                 'Non-HQ': { 'Cloth': 1 },
                 'HQ': {}
             },
@@ -489,7 +550,15 @@ const itemComponents = {
                 'Non-HQ': { 'Cloth': 1 },
                 'HQ': {}
             },
+            'Boonie': {
+                'Non-HQ': { 'Cloth': 1 },
+                'HQ': {}
+            },
             'Cargo Pants': {
+                'Non-HQ': { 'Cloth': 1 },
+                'HQ': {}
+            },
+            'Cargo Pants (Colored)': {
                 'Non-HQ': { 'Cloth': 1 },
                 'HQ': {}
             },
@@ -521,6 +590,10 @@ const itemComponents = {
                 'Non-HQ': { 'Cloth': 1 },
                 'HQ': {}
             },
+            'Half Mask': {
+                'Non-HQ': { 'Cloth': 1 },
+                'HQ': {}
+            },
             'Hunting Vest': {
                 'Non-HQ': { 'Cloth': 1 },
                 'HQ': {}
@@ -530,6 +603,10 @@ const itemComponents = {
                 'HQ': {}
             },
             'Jeans': {
+                'Non-HQ': { 'Cloth': 1 },
+                'HQ': {}
+            },
+            'Jeans (Colored)': {
                 'Non-HQ': { 'Cloth': 1 },
                 'HQ': {}
             },
@@ -569,11 +646,23 @@ const itemComponents = {
                 'Non-HQ': { 'Cloth': 1 },
                 'HQ': {}
             },
+            'M88 Jacket - Rolled-up': {
+                'Non-HQ': { 'Cloth': 1 },
+                'HQ': {}
+            },
             'M88 Trousers': {
                 'Non-HQ': { 'Cloth': 1 },
                 'HQ': {}
             },
             'Mask (Medical)': {
+                'Non-HQ': { 'Cloth': 1 },
+                'HQ': {}
+            },
+            'Mask (Latex)': {
+                'Non-HQ': { 'Cloth': 1 },
+                'HQ': {}
+            },
+            'Mask (Ski)': {
                 'Non-HQ': { 'Cloth': 1 },
                 'HQ': {}
             },
@@ -595,6 +684,10 @@ const itemComponents = {
             },
             'Pullover': {
                 'Non-HQ': { 'Cloth': 1 },
+                'HQ': {}
+            },
+            'Robe': {
+                'Non-HQ': { 'Cloth': 7 },
                 'HQ': {}
             },
             'Runner Shoe': {
